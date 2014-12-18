@@ -1,0 +1,8 @@
+.panel-modal-big{
+	width: 800px !important;
+	font-size: 14px !important;
+}
+.panel-modal-scrol{
+	overflow: auto;
+	max-height: 500px !important;
+}
