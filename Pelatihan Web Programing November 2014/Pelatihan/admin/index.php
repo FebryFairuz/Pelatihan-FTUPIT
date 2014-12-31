@@ -1,6 +1,8 @@
 <?php 
 session_start();
 include "../config/koneksi.php";
+include "../config/rupiah.php";
+date_default_timezone_set('Asia/Jakarta');
 error_reporting(0);
 if(empty($_SESSION['username'])){
   header("location:login.php");
@@ -26,6 +28,9 @@ if(empty($_SESSION['username'])){
     <script src="assets/lib/jquery-2.1.1.min.js" type="text/javascript"></script>
     <script src="assets/lib/bootstrap/js/bootstrap.js"></script>
 
+    <script src="assets/lib/upload-photos/upload-photos.js" type="text/javascript">
+    </script>
+    
     <script src="assets/lib/validasi/jquery.validate.js" type="text/javascript"></script>    
     <script src="assets/lib/jQuery-Knob/js/jquery.knob.js" type="text/javascript"></script>
     
@@ -62,7 +67,6 @@ if(empty($_SESSION['username'])){
             $('#main-menu').append(uls.clone());
         });
     </script>
-    
 
     <link rel="stylesheet" type="text/css" href="assets/stylesheets/theme.css">
     <link rel="stylesheet" type="text/css" href="assets/stylesheets/premium.css">
@@ -130,10 +134,11 @@ if(empty($_SESSION['username'])){
         <li><ul class="nav nav-list collapse setting">
             <li class="level"><a href="?p=level"><span class="fa fa-caret-right"></span> Level</a></li>
             <li class="jenis"><a href="?p=jenis_produk"><span class="fa fa-caret-right"></span> Jenis Produk</a></li>
+            <li class="brands"><a href="?p=brands"><span class="fa fa-caret-right"></span> Brands</a></li>
             </ul>
         </li>
         <li><a href="?p=users" class="nav-header"><i class="fa fa-fw fa-users"></i> Users</a></li>
-        <li><a href="" class="nav-header"><i class="fa fa-fw fa-stethoscope"></i> menu</a></li>
+        <li><a href="?p=product" class="nav-header"><i class="glyphicon glyphicon-edit"></i> Product</a></li>
         <!-- <li><a href="?p=coba" class="nav-header"><i class="fa fa-fw fa-eye"></i> coba</a></li>       -->
       </ul>
     </div>
@@ -203,7 +208,6 @@ if(empty($_SESSION['username'])){
         $(".table tbody tr").click(function(){
             $("tr").removeClass("pilih");
             $(this).addClass("pilih");
-            console.log("aaa");
         });
       //});
     </script>

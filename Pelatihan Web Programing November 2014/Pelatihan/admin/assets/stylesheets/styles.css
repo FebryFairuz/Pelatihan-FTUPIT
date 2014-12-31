@@ -24,3 +24,27 @@
 	padding: 10px;
 	color: white;
 }
+.blue-modal{
+	background: #4d5b76;
+	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #4d5b76), color-stop(1, #6f80a1));
+	background: -ms-linear-gradient(bottom, #4d5b76, #6f80a1);
+	background: -moz-linear-gradient(center bottom, #4d5b76 0%, #6f80a1 100%);
+	background: -o-linear-gradient(bottom, #4d5b76, #6f80a1);
+	filter: progid:dximagetransform.microsoft.gradient(startColorStr='#e3e3e3', EndColorStr='#ffffff');
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#6f80a1',EndColorStr='#4d5b76')";
+}
+#daftarGambar{
+	overflow: auto;
+	height: 350px;
+	overflow-x: hidden;
+}
+.img-pic{
+	width: 250px;
+	height: 230px;
+}
+.list-picture{
+	padding: 10px;
+}
+.pilih-pic{
+	background: #ddd;
+}

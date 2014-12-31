@@ -1,17 +1,17 @@
 <?php 
-$sqlTampil = "SELECT * FROM `jenis_produk` ORDER BY nama ASC";
+$sqlTampil = "SELECT * FROM `brands` ORDER BY nama ASC";
 $queryTampil = mysql_query($sqlTampil);
 $jmlTampil = mysql_num_rows($queryTampil);
 ?>
 <script type="text/javascript">
 	$(document).ready(function(){
 	  $(".setting").addClass("in");
-	  $(".jenis").addClass("active");
+	  $(".brands").addClass("active");
 	});
 </script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#formJenis").validate({
+		$("#formBrands").validate({
             rules:{ nama:"required"},
             messages:{ 
                     nama: {
@@ -55,12 +55,13 @@ $jmlTampil = mysql_num_rows($queryTampil);
 	      <?php 
 	      	if($jmlTampil > 0){
 	      		$no = 0;
-	      		while($jenis_produk = mysql_fetch_array($queryTampil)){
+	      		while($brands = mysql_fetch_array($queryTampil)){
 		  ?>
 				    <tr>
 				      <td><?php echo $no+1; ?></td>
-				      <td><span class="nama"><?php echo $jenis_produk['nama'] ?></span>
-				      	  <span class="id_jenis hidden"><?php echo $jenis_produk['id_jenis'] ?></span>
+				      <td><span class="nama"><?php echo $brands['nama'] ?></span>
+				      	  <span class="id_brands hidden"><?php echo $brands['id_brands'] ?></span>
+				      	  <span class="jenis_brands hidden"><?php echo $brands['id_brands'] ?></span>
 				      </td>
 				    </tr>
 		  <?php 
@@ -84,25 +85,93 @@ $jmlTampil = mysql_num_rows($queryTampil);
 <div class="modal small fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog panel-modal-big">
     <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel">Form <?php echo ucwords($p); ?></h3>
+        <div class="modal-header blue-modal">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><br>
         </div>
-        <form action="" method="post" id="formJenis" name="formJenis" autocomplete="off">        	
-	        <div class="modal-body panel-modal-scrol">
-	            <label>Name</label><br>
-	            <input type="text" name="nama" class="form-control required" minlength="4" maxlength="10" placeholder="Nama Jenis Produk">
-	            <div id="info"></div>
-	            <div class="hidden">
-		            <input type="text" name="id_jenis" />
-		            <input type="text" name="statusTombol" />
-	            </div>
-	        </div>
-	        <div class="modal-footer">
-	            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
-	            <input type="submit" value="Save" id="btn-saving" class="btn btn-primary" />
-	        </div>
-        </form>
+        <div role="tabpanel">
+		  <!-- Nav tabs -->
+		  <ul class="nav nav-tabs" role="tablist">
+		    <li role="presentation" class="form active"><a href="#data" aria-controls="data" role="tab" data-toggle="tab">Form <?php echo ucwords($p); ?></a></li>
+		    <li role="presentation" class="tab-add-picture"><a href="#picture" aria-controls="picture" role="tab" data-toggle="tab">Add Picture</a></li>
+		    <li role="presentation" class="tab-list-picture"><a href="#listPicture" aria-controls="listPicture" role="tab" data-toggle="tab">Picture List</a></li>
+		  </ul>
+
+		  <!-- Tab panes -->
+		  <div class="tab-content">
+		  <!-- FORM -->
+		    <div role="tabpanel" class="tab-pane tab-form active" id="data">
+	    		<form action="" method="post" id="formBrands" name="formBrands" autocomplete="off">
+			    	<div class="modal-body panel-modal-scrol">
+			    		<label>Name</label><br>
+			            <input type="text" name="nama" class="form-control required" minlength="4" maxlength="10" placeholder="Nama brands Produk">
+			            <div id="info"></div>
+			            <div class="hidden">
+				            <input type="text" name="id_brands" />
+				            <input type="text" name="statusTombol" />
+			            </div>
+			    	</div>
+			    	<div class="modal-footer">
+			            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		            	<input type="submit" value="Save" id="btn-saving" class="btn btn-primary" />
+			        </div>
+		        </form>
+		    </div>
+
+		    <!-- ADD PICTURE -->
+		    <div role="tabpanel" class="tab-pane tab-picture" id="picture">
+		    	<div class="modal-body panel-modal-scrol">
+		    		<div class="col-sm-6">
+			    		<form id="uploadimage" action="" method="post" 
+			    		enctype="multipart/form-data">
+							<div id="image_preview"><center>
+								<img id="previewing" src="assets/images/noimage.png" />
+								</center>
+							</div>	
+							<div id="selectImage">
+								<label>Select Your Image</label><br/>
+					            <input type="hidden" name="id_data" required />
+				                <input type="hidden" name="jenis" value="brands" required />
+				                <input type="file" name="file" id="file" required class="form-control" />
+								<input type="submit" value="Upload" class="form-control btn btn-primary" />
+				            </div>                   
+						</form>		
+						<div id="loading" hidden>
+							<img src='assets/images/loading.gif' width='50'> Wait for a second..
+						</div>
+			    	</div>
+			    	<div class="col-sm-6">
+						<div class="rule">
+							<h3>Syarat Foto :</h3>
+							<ol>
+								<li>File berupa JPEG, JPG dan PNG</li>
+								<li>Ukuran gambar maksimal 1MB</li>
+							</ol>
+						</div>
+						<div id="message"></div>				    						    		
+			    	</div>
+
+		    	</div>
+		    	<div class="modal-footer">
+		            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		        </div>
+		    </div>
+
+		    <!-- DAFTAR PICTURE -->
+		    <div role="tabpanel" class="tab-pane tab-picture-list" id="listPicture">
+		    	<div class="modal-body panel-modal-scrol">
+		    		<div class="info-delete-pic"></div>
+		    		<div id="daftarGambar"></div>
+		    	</div>
+		    	<div class="modal-footer">
+		            <button class="btn btn-default" data-dismiss="modal" 
+		            aria-hidden="true">Cancel</button>
+		            <button class="btn btn-primary btn-delete-list-pic">
+		            Delete</button>
+		        </div>
+		    </div>
+		  </div>
+
+		</div>
     </div>
   </div>
 </div>
@@ -137,7 +206,7 @@ $jmlTampil = mysql_num_rows($queryTampil);
 <script type="text/javascript">
    $(document).ready(function(){
     //validasi
-    $("#formJenis").validate({
+    $("#formBrands").validate({
         rules:{nama:"required"},
         messages:{ 
                 nama: {
@@ -155,40 +224,58 @@ $jmlTampil = mysql_num_rows($queryTampil);
     //perintah input
    	    $("#newData").click(function(){
     		$("#btn-saving").prop('disabled', true);
+    		
+    		$(".form").addClass("active");
+   	    	$(".tab-form").addClass("active");
+   	    	$(".tab-picture").removeClass("active");
+   	    	$(".tab-picture-list").removeClass("active");
+   	    	$(".tab-add-picture").hide();
+   	    	$(".tab-list-picture").hide();
+
    	    	$("[name=nama]").val("");
-   	    	$("[name=id_jenis]").val("");
+   	    	$("[name=id_brands]").val("");
    	    	$("[name=statusTombol]").val("simpan");
    	    });
    	    
    	//perintah edit
    		$("#btn-edit").click(function(){
-    		var id_jenis = $(".pilih .id_jenis").html();
+    		$(".form").addClass("active");
+   	    	$(".tab-form").addClass("active");
+   	    	$(".tab-add-picture").removeClass("active");
+   	    	$(".tab-picture").removeClass("active");
+   	    	$(".tab-list-picture").removeClass("active");
+   	    	$(".tab-picture-list").removeClass("active");
+   	    	$(".tab-add-picture").show();
+   	    	$(".tab-list-picture").show();
+
+    		var id_brands = $(".pilih .id_brands").html();
             var nama = $(".pilih .nama").html();
-            console.log(id_jenis+nama);
+            console.log(id_brands+nama);
             $("[name=nama]").val(nama);
-            $("[name=id_jenis]").val(id_jenis);
+            $("[name=id_brands]").val(id_brands);
+            $("[name=id_data]").val(id_brands);
             $("[name=statusTombol]").val("update");
 	    	$("#btn-saving").prop('disabled', false);
     	});
 
    	//form eksekusi input dan edit dengan ajax
-    	$("[name=formJenis]").submit(function(e){
+    	$("[name=formBrands]").submit(function(e){
 			e.preventDefault(); // mencegah default. defaultnya form itu ngeload ke action tapi dibatalkan dengan fungsi ini
-			var id_jenis=$("[name='id_jenis']").val();
+			var id_brands=$("[name='id_brands']").val();
 			var nama=$("[name='nama']").val();
 			var statusTombol=$("[name='statusTombol']").val();
 			console.log(nama);
 			console.log(statusTombol);
 			$.ajax({
 			  type:"post",
-			  url:"proses/jenis_produk.php",
-			  data:"id_jenis="+id_jenis+"&nama="+nama+"&statusTombol="+statusTombol,
+			  url:"proses/brands.php",
+			  data:"id_brands="+id_brands+"&nama="+nama+"&statusTombol="+statusTombol,
 			  success:function(data){
 			  	console.log(data);
 			  	if(data != 0){
 			  		var loading = "<img src='assets/images/loading.gif' width='50'> Wait for a second..";
-			  		/*var url = "<meta http-equiv=\"refresh\" content=\"1; url=?p=<?php echo $p;?>\" />";
-			    	*/
+			  		var url = "<meta http-equiv=\"refresh\" content=\"1; url=?p=<?php echo $p;?>\" />";
+			    	
 			    	$("#info").append(loading);
 			    	setInterval(function() {
 			      		var address = "?p=<?php echo $p;?>";
@@ -205,30 +292,30 @@ $jmlTampil = mysql_num_rows($queryTampil);
 
     //perintah Hapus
     	$("#btn-delete").click(function(){
-    		var id_jenis = $(".pilih .id_jenis").html();
+    		var id_brands = $(".pilih .id_brands").html();
             var nama = $(".pilih .nama").html();
-            console.log(id_jenis+nama);
+            console.log(id_brands+nama);
             $(".isi").html(nama);
-            $("[name=deleteData] .id").html("<input type='hidden' name='id' value='"+id_jenis+"'>");
+            $("[name=deleteData] .id").html("<input type='hidden' name='id' value='"+id_brands+"'>");
     	});
 
         $("[name=deleteData]").submit(function(e){
         	e.preventDefault();
-			var id_jenis=$("[name='id']").val();
+			var id_brands=$("[name='id']").val();
 			var statusTombol="hapus";
-			console.log(id_jenis);
+			console.log("id="+id_brands);
 			console.log(statusTombol);
 			$.ajax({
 			  type:"post",
-			  url:"proses/jenis_produk.php",
-			  data:"id_jenis="+id_jenis+"&statusTombol="+statusTombol,
+			  url:"proses/brands.php",
+			  data:"id_brands="+id_brands+"&statusTombol="+statusTombol,
 			  success:function(data){
 			  	console.log(data);
 			  	if(data != 0){
 			  		setInterval(function() {
 			      		var address = "?p=<?php echo $p;?>";
 						$(location).attr('href',address);
-                	}, 2000);
+                	}, 1000);
 			  	}else{
 			    	var failed = "<i class='glyphicon glyphicon-remove'> There is something wrong. Try again.."
 			    	$("#info").append(failed);			  		
@@ -237,6 +324,5 @@ $jmlTampil = mysql_num_rows($queryTampil);
 
 			});
         });
-
    });
 </script>

@@ -372,7 +372,7 @@ if(!empty($_SESSION['username'])){
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $.backstretch("assets/images/a.jpg", {speed: 500});
+        //$.backstretch("assets/images/a.jpg", {speed: 500});
         
         $("#formLogin").validate({
             rules:{ username:"required",

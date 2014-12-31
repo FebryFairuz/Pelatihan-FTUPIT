@@ -54,7 +54,7 @@ error_reporting(0);
 				<div class="row">
 					<div class="col-sm-2">
 						<div class="logo pull-left">
-							<a href="index.html"><img src="dist-2/img/cooperation/corp1.png" alt=""></a>
+							<a href=""><img src="dist/img/cooperation/corp1.png" data-toggle='tooltip' data-placement='bottom' title='Febry Fairuz Fashions'></a>
 						</div>
 					</div>
 					<div class="col-sm-10">
@@ -104,9 +104,18 @@ error_reporting(0);
                             </li> 
 							<li class="dropdown"><a href="#">Products<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="">Analitical</a></li>
-									<li><a href="">General</a></li>
-									<li><a href="">Life</a></li>
+                                    <?php 
+                                    $sqlProduk = "select * from jenis_produk";
+                                    $queryProduk = mysql_query($sqlProduk);
+                                    $jmlProduk = mysql_num_rows($queryProduk);
+                                    if($jmlProduk > 0){
+                                    	while ($pd = mysql_fetch_array($queryProduk)) {
+                                    		echo "<li><a href=''>$pd[nama]</a></li>";
+                                    	}
+                                    }else{
+                                		echo "<li><a href=''>Empty</a></li>";
+                                    }
+                                    ?>
                                 </ul>
                             </li>
                             <li class="dropdown"><a href="#">Services<i class="fa fa-angle-down"></i></a>
@@ -177,103 +186,7 @@ error_reporting(0);
 <section>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-3">
-				<div class="left-sidebar">
-					<h2>Category</h2>
-					<div class="panel-group category-products" id="accordian"><!--category-productsr-->
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordian" href="#sportswear" class="collapsed">
-										<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-										Sportswear
-									</a>
-								</h4>
-							</div>
-							<div id="sportswear" class="panel-collapse collapse" style="height: 0px;">
-								<div class="panel-body">
-									<ul>
-										<li><a href="#">Nike </a></li>
-										<li><a href="#">Under Armour </a></li>
-										<li><a href="#">Adidas </a></li>
-										<li><a href="#">Puma</a></li>
-										<li><a href="#">ASICS </a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordian" href="#mens" class="collapsed">
-										<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-										Mens
-									</a>
-								</h4>
-							</div>
-							<div id="mens" class="panel-collapse collapse" style="height: 0px;">
-								<div class="panel-body">
-									<ul>
-										<li><a href="#">Fendi</a></li>
-										<li><a href="#">Guess</a></li>
-										<li><a href="#">Valentino</a></li>
-										<li><a href="#">Dior</a></li>
-										<li><a href="#">Versace</a></li>
-										<li><a href="#">Armani</a></li>
-										<li><a href="#">Prada</a></li>
-										<li><a href="#">Dolce and Gabbana</a></li>
-										<li><a href="#">Chanel</a></li>
-										<li><a href="#">Gucci</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordian" href="#womens" class="collapsed">
-										<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-										Womens
-									</a>
-								</h4>
-							</div>
-							<div id="womens" class="panel-collapse collapse" style="height: 0px;">
-								<div class="panel-body">
-									<ul>
-										<li><a href="#">Fendi</a></li>
-										<li><a href="#">Guess</a></li>
-										<li><a href="#">Valentino</a></li>
-										<li><a href="#">Dior</a></li>
-										<li><a href="#">Versace</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title"><a href="#">Kids</a></h4>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title"><a href="#">Fashion</a></h4>
-							</div>
-						</div>
-					</div><!--/category-products-->
-				 	<br>
-					<div class="brands_products"><!--brands_products-->
-						<h2>Brands</h2>
-						<div class="brands-name">
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#"> <span class="pull-right">(50)</span>Acne</a></li>
-								<li><a href="#"> <span class="pull-right">(9)</span>Boudestijn</a></li>
-								<li><a href="#"> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
-							</ul>
-						</div>
-					</div><!--/brands_products-->			
-				</div>
-			</div>
+			<?php include "kiri.php"; ?>
 			<div class="col-sm-9">
 				<div class="features_items"><!--features_items-->
 					<h2 class="title text-center">Features Items</h2>
@@ -378,20 +291,23 @@ error_reporting(0);
 				</div>
 				<div class="col-sm-3">
 					<div class="single-widget">
-						<h2>Produk Ternama</h2>
-						<div class="col-sm-3 col-xs-3">
-							<img src="dist/img/merek/merk1.png" data-toggle="tooltip" data-placement="bottom" title="DC" width="50" />
-						</div>
-						<div class="col-sm-3 col-xs-3">
-							<img src="dist/img/merek/merk2.png" data-toggle="tooltip" data-placement="bottom" title="Macbeth" width="50" />
-						</div>
-						<div class="col-sm-3 col-xs-3">
-							<img src="dist/img/merek/merk1.png" data-toggle="tooltip" data-placement="bottom" title="DC" width="50" />
-						</div>
-						<div class="col-sm-3 col-xs-3">
-							<img src="dist/img/merek/merk2.png" data-toggle="tooltip" data-placement="bottom" title="Macbeth" width="50" />
-						</div>
-
+						<?php 
+						$sqlBrands = "select * from brands order by nama ASC limit 3";
+						$queryBrands = mysql_query($sqlBrands);
+						$jmlBrands = mysql_num_rows($queryBrands);
+						if($jmlBrands > 0){
+							echo "<h2>Produk Ternama</h2>";
+							while ($brands = mysql_fetch_array($queryBrands)) {
+								//take a photos from tabel picture
+								$sqlPicture = "select * from picture where jenis = 'brands' and id = $brands[id_brands]";
+								$queryPicture = mysql_query($sqlPicture);
+								$picture = mysql_fetch_array($queryPicture);
+								echo "<div class='col-sm-3 col-xs-3'>
+										<img src='admin/photos_upload/brands/$picture[picture]' data-toggle='tooltip' data-placement='bottom' title='$brands[nama]' width='50' height='40' />
+									  </div>";
+							}
+						}
+						?>
 					</div>
 				</div>
 			</div>
@@ -701,9 +617,6 @@ error_reporting(0);
     </div>
   </div>
 </div>
-
-
-
 
 <script type="text/javascript">
 	$(document).ready(function(){
